@@ -1,6 +1,7 @@
 #!flask/bin/python
 from flask import Flask
 import requests
+import time
 
 app = Flask(__name__)
 
@@ -29,6 +30,7 @@ def trigger_cinema_scene():
 		payload = {'timings': timings}
 		r = requests.post(url, data=payload, headers=headers)
 		response += r.text + "\n"
+		time.sleep(2)
 	return response
 	
 
