@@ -2,6 +2,7 @@
 from flask import Flask
 import requests
 import time
+import threading
 
 app = Flask(__name__)
 
@@ -18,6 +19,13 @@ def index():
 
 @app.route('/api/scene/cinema')
 def trigger_cinema_scene():
+	def run_job():
+		while True:
+			print("trololo")
+			time.sleep(2)
+			
+	thread = threading.Thread(target=run_job)
+	thread.start()
 	# response = ""
 	# url = "http://192.168.1.56/play"
 	# headers = {'Content-Type': 'application/x-www-form-urlencoded'}
