@@ -31,7 +31,7 @@ def trigger_cinema_scene():
 		payload = {'timings': timings}
 		r = requests.post(url, data=payload, headers=headers)
 		timings += "\n"
-		print(index)
+		print(str(index))
 		response += r.text + "\n"
 		print(response)
 		time.sleep(2)
