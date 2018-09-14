@@ -95,8 +95,8 @@ def trigger_kodi_scene():
 	thread.start()
 	return "Kodi scene successfully triggered"
 
-@app.route('/api/scene/power_up_to_kodi')
-def trigger_powerup_to_kodi():
+@app.route('/api/scene/power_up_to_chromecast')
+def trigger_powerup_to_chromecast():
 	index = 0
 	print(str(index))
 	sent_signals = [signals["Power TV"], signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
