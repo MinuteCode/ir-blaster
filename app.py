@@ -35,10 +35,11 @@ def trigger_chromecast_scene():
 			r = requests.post(url, data=payload, headers=headers)
 			print(r.text)
 			index += 1
+			sleep_timer = 0.5
 			if index <= 0:
-				time.sleep(5)
-			else:
-				time.sleep(0.5)
+				sleep_timer = 7
+			
+			time.sleep(sleep_timer)
 
 	thread = threading.Thread(target=run_job, args=[index])
 	thread.start()
@@ -60,10 +61,11 @@ def trigger_kodi_scene():
 			payload = {'timings': timings}
 			r = requests.post(url, data=payload, headers=headers)
 			index += 1
+			sleep_timer = 0.5
 			if index <= 0:
-				time.sleep(5)
-			else:
-				time.sleep(0.5)
+				sleep_timer = 7
+			
+			time.sleep(sleep_timer)
 
 	thread = threading.Thread(target=run_job, args=[index])
 	thread.start()
