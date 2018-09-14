@@ -35,7 +35,7 @@ def trigger_chromecast_scene():
 			r = requests.post(url, data=payload, headers=headers)
 			print(r.text)
 			index += 1
-			time.sleep(2)
+			time.sleep(1)
 
 	thread = threading.Thread(target=run_job, args=[index])
 	thread.start()
@@ -57,7 +57,7 @@ def trigger_chromecast_scene():
 			payload = {'timings': timings}
 			r = requests.post(url, data=payload, headers=headers)
 			index += 1
-			time.sleep(2)
+			time.sleep(1)
 
 	thread = threading.Thread(target=run_job, args=[index])
 	thread.start()
