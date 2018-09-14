@@ -36,7 +36,7 @@ def trigger_chromecast_scene():
 			print(r.text)
 			index += 1
 			if index <= 0:
-				time.sleep(2)
+				time.sleep(5)
 			else:
 				time.sleep(0.5)
 
@@ -61,7 +61,7 @@ def trigger_kodi_scene():
 			r = requests.post(url, data=payload, headers=headers)
 			index += 1
 			if index <= 0:
-				time.sleep(2)
+				time.sleep(5)
 			else:
 				time.sleep(0.5)
 
