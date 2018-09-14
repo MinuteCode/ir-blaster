@@ -18,25 +18,25 @@ def index():
 
 @app.route('/api/scene/cinema')
 def trigger_cinema_scene():
-	response = ""
-	url = "http://192.168.1.56/play"
-	headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-	sent_signals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
-	index = 1
-	for signal in signals:
-		timings = ""
-		print(str(index))
-		for element in sent_signals:
-			timings += str(element) + ", "
-		timings = timings[:-2]
-		payload = {'timings': timings}
-		r = requests.post(url, data=payload, headers=headers)
-		timings += "\n"
-		response += r.text + "\n"
-		print(response)
-		time.sleep(2)
-		index += 1
-	return response
+	# response = ""
+	# url = "http://192.168.1.56/play"
+	# headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+	# sent_signals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
+	# index = 1
+	# for signal in signals:
+	# 	timings = ""
+	# 	print(str(index))
+	# 	for element in sent_signals:
+	# 		timings += str(element) + ", "
+	# 	timings = timings[:-2]
+	# 	payload = {'timings': timings}
+	# 	r = requests.post(url, data=payload, headers=headers)
+	# 	timings += "\n"
+	# 	response += r.text + "\n"
+	# 	print(response)
+	# 	time.sleep(2)
+	# 	index += 1
+	return "yolo"
 	
 
 if __name__ == '__main__':
