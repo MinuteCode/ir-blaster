@@ -37,6 +37,8 @@ def trigger_chromecast_scene():
 			index += 1
 			if index <= 0:
 				timer.sleep(2)
+			else:
+				timer.sleep(0.5)
 
 	thread = threading.Thread(target=run_job, args=[index])
 	thread.start()
@@ -60,6 +62,8 @@ def trigger_kodi_scene():
 			index += 1
 			if index <= 0:
 				timer.sleep(2)
+			else:
+				timer.sleep(0.5)
 
 	thread = threading.Thread(target=run_job, args=[index])
 	thread.start()
