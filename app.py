@@ -97,7 +97,6 @@ def trigger_kodi_scene():
 
 @app.route('/api/scene/power_up_to_kodi')
 def trigger_powerup_to_kodi():
-	def trigger_chromecast_scene():
 	index = 0
 	print(str(index))
 	sent_signals = [signals["Power TV"], signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
