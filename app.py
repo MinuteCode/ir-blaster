@@ -19,13 +19,13 @@ def index():
 
 @app.route('/api/scene/cinema')
 def trigger_cinema_scene():
-	index = 0
+	global index = 0
 	print(str(index))
 	sent_signals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
 	url = "http://192.168.1.56/play"
 	headers = {'Content-Type': 'application/x-www-form-urlencoded'}
 	def run_job():
-		while index < 10:
+		while global index < 10:
 			# response = ""
 			# url = "http://192.168.1.56/play"
 			# headers = {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -44,7 +44,7 @@ def trigger_cinema_scene():
 			payload = {'timings': timings}
 			r = requests.post(url, data=payload, headers=headers)
 			print(r.text)
-			index += 1
+			global index += 1
 			time.sleep(2)
 
 	thread = threading.Thread(target=run_job)
