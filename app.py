@@ -47,7 +47,7 @@ def trigger_cinema_scene():
 			index += 1
 			time.sleep(2)
 
-	thread = threading.Thread(target=run_job, args=(index))
+	thread = threading.Thread(target=run_job, args=[index])
 	thread.start()
 	# response = ""
 	# url = "http://192.168.1.56/play"
