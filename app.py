@@ -42,7 +42,7 @@ def trigger_chromecast_scene():
 	return "Chromecast scene successfully triggered"
 
 @app.route('/api/scene/kodi')
-def trigger_chromecast_scene():
+def trigger_kodi_scene():
 	index = 0
 	sent_signals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
 	url = "http://192.168.1.56/play"
