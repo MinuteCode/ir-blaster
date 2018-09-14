@@ -114,8 +114,8 @@ def trigger_powerup_to_chromecast():
 			sleep_timer = 0.2
 			if index == 0:
 				sleep_timer = 10
-			else if index == 1:
-				sleep_timer = 3
+			elif index == 1:
+				sleep_timer = 5
 			time.sleep(sleep_timer)
 			index += 1
 
