@@ -24,7 +24,7 @@ def trigger_cinema_scene():
 			response = ""
 			url = "http://192.168.1.56/play"
 			headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-			print(', '.join(signals['Source']))
+			print(str(', '.join(signals['Source'])))
 			payload = {'timings': ', '.join(signals['Source'])}
 			r = requests.post(url, payload=payload, headers=headers)
 			print(r.text + '\n')
