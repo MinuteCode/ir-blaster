@@ -94,6 +94,35 @@ def trigger_kodi_scene():
 	thread = threading.Thread(target=run_job, args=[index])
 	thread.start()
 	return "Kodi scene successfully triggered"
+
+@app.route('/api/scene/power_up_to_kodi')
+def trigger_powerup_to_kodi():
+	def trigger_chromecast_scene():
+	index = 0
+	print(str(index))
+	sent_signals = [signals["Power TV"], signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
+	url = "http://192.168.1.56/play"
+	headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+	def run_job(index):
+		while index < 11:
+			timings = ""
+			for element in sent_signals[index]:
+				timings += str(element) + ", "
+
+			timings = timings[:-2]
+			payload = {'timings': timings}
+			r = requests.post(url, data=payload, headers=headers)
+			sleep_timer = 0.2
+			if index == 0:
+				sleep_timer = 10:
+			else if index == 1:
+				sleep_timer = 3
+			time.sleep(sleep_timer)
+			index += 1
+
+	thread = threading.Thread(target=run_job, args=[index])
+	thread.start()
+	return "Chromecast scene successfully triggered"
 	
 
 if __name__ == '__main__':
