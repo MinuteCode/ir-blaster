@@ -18,7 +18,7 @@ def index():
 	return "Hello, World"
 
 @app.route('/api/scene/chromecast')
-def trigger_cinema_scene():
+def trigger_chromecast_scene():
 	index = 0
 	print(str(index))
 	sent_signals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
@@ -26,17 +26,6 @@ def trigger_cinema_scene():
 	headers = {'Content-Type': 'application/x-www-form-urlencoded'}
 	def run_job(index):
 		while index < 10:
-			# response = ""
-			# url = "http://192.168.1.56/play"
-			# headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-			# timings = ""
-			# for element in signals['Source']:
-			# 	timings += str(element) + ", "
-			# timings = timings[:-2]
-			# payload = {'timings': timings}
-			# r = requests.post(url, data=payload, headers=headers)
-			# print(r.text + '\n')
-			# time.sleep(2)
 			timings = ""
 			for element in sent_signals[index]:
 				timings += str(element) + ", "
@@ -50,25 +39,29 @@ def trigger_cinema_scene():
 
 	thread = threading.Thread(target=run_job, args=[index])
 	thread.start()
-	# response = ""
-	# url = "http://192.168.1.56/play"
-	# headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-	# sent_signals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
-	# index = 1
-	# for signal in signals:
-	# 	timings = ""
-	# 	print(str(index))
-	# 	for element in sent_signals:
-	# 		timings += str(element) + ", "
-	# 	timings = timings[:-2]
-	# 	payload = {'timings': timings}
-	# 	r = requests.post(url, data=payload, headers=headers)
-	# 	timings += "\n"
-	# 	response += r.text + "\n"
-	# 	print(response)
-	# 	time.sleep(2)
-	# 	index += 1
-	return "yolo"
+	return "Chromecast scene successfully triggered"
+
+@app.route('/api/scene/kodi')
+def trigger_chromecast_scene():
+	index = 0
+	sent_signals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
+	url = "http://192.168.1.56/play"
+	headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+	def run_job(index):
+		while index < 8:
+			timings = ""
+			for element in sent_signals[index]:
+				timings += str(element) + ", "
+
+			timings = timings[:-2]
+			payload = {'timings': timings}
+			r = requests.post(url, data=payload, headers=headers)
+			index += 1
+			time.sleep(2)
+
+	thread = threading.Thread(target=run_job, args=[index])
+	thread.start()
+	return "Kodi scene successfully triggered"
 	
 
 if __name__ == '__main__':
