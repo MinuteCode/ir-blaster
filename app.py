@@ -61,6 +61,7 @@ def trigger_kodi_scene():
 			payload = {'timings': timings}
 			r = requests.post(url, data=payload, headers=headers)
 			sleep_timer = 0.5
+			print("index = " + str(index))
 			if index <= 0:
 				sleep_timer = 7
 			
