@@ -23,7 +23,7 @@ def trigger_cinema_scene():
 	sent_signals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
 	for signal in signals:
 		timings = ""
-		for element in signal:
+		for element in sent_signals:
 			timings += str(element) + ", "
 		timings = timings[:-2]
 		payload = {'timings': timings}
