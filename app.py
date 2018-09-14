@@ -21,9 +21,14 @@ def index():
 def trigger_cinema_scene():
 	def run_job():
 		while True:
-			print("trololo")
+			response = ""
+			url = "http://192.168.1.56/play"
+			headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+			payload = {'timings': ', '.join(signals['Source'])}
+			r = requests.post(url, payload=payload, headers=headers)
+			print(r.text + '\n')
 			time.sleep(2)
-			
+
 	thread = threading.Thread(target=run_job)
 	thread.start()
 	# response = ""
