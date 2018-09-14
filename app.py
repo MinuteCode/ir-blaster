@@ -17,7 +17,7 @@ signals["Enter"] = [9152, 4350, 680, 446, 682, 446, 676, 450, 680, 448, 678, 448
 def index():
 	return "Hello, World"
 
-@app.route('/api/scene/cinema')
+@app.route('/api/scene/chromecast')
 def trigger_cinema_scene():
 	index = 0
 	print(str(index))
