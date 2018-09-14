@@ -33,7 +33,7 @@ def trigger_chromecast_scene():
 			timings = timings[:-2]
 			payload = {'timings': timings}
 			r = requests.post(url, data=payload, headers=headers)
-			sleep_timer = 0.5
+			sleep_timer = 0.2
 			if index <= 0:
 				sleep_timer = 5
 			time.sleep(sleep_timer)
@@ -58,7 +58,7 @@ def trigger_kodi_scene():
 			timings = timings[:-2]
 			payload = {'timings': timings}
 			r = requests.post(url, data=payload, headers=headers)
-			sleep_timer = 0.5
+			sleep_timer = 0.2
 			if index <= 0:
 				sleep_timer = 5
 			time.sleep(sleep_timer)
