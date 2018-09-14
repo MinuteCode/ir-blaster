@@ -22,18 +22,20 @@ def trigger_cinema_scene():
 	url = "http://192.168.1.56/play"
 	headers = {'Content-Type': 'application/x-www-form-urlencoded'}
 	sent_signals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
+	index = 1
 	for signal in signals:
 		timings = ""
 		for element in sent_signals:
 			timings += str(element) + ", "
 		timings = timings[:-2]
 		payload = {'timings': timings}
-		timings += "\n"
-		print(timings + "\n")
 		r = requests.post(url, data=payload, headers=headers)
+		timings += "\n"
+		print(index)
 		response += r.text + "\n"
 		print(response)
 		time.sleep(2)
+		index += 1
 	return response
 	
 
