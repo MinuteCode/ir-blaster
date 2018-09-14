@@ -27,6 +27,7 @@ def trigger_cinema_scene():
 		for element in sent_signals:
 			timings += str(element) + ", "
 		timings = timings[:-2]
+		print(timings)
 		payload = {'timings': timings}
 		r = requests.post(url, data=payload, headers=headers)
 		response += r.text + "\n"
