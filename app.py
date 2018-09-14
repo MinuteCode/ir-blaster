@@ -19,8 +19,13 @@ def index():
 
 @app.route('/api/scene/cinema')
 def trigger_cinema_scene():
+	index = 0
+	print(str(index))
+	sent_signals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
+	url = "http://192.168.1.56/play"
+	headers = {'Content-Type': 'application/x-www-form-urlencoded'}
 	def run_job():
-		while True:
+		while index < 10:
 			# response = ""
 			# url = "http://192.168.1.56/play"
 			# headers = {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -32,24 +37,15 @@ def trigger_cinema_scene():
 			# r = requests.post(url, data=payload, headers=headers)
 			# print(r.text + '\n')
 			# time.sleep(2)
-			response = ""
-			url = "http://192.168.1.56/play"
-			headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-			sent_signals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
-			index = 1
-			for signal in signals:
-				timings = ""
-				print(str(index))
-				for element in sent_signals:
-					timings += str(element) + ", "
-				timings = timings[:-2]
-				payload = {'timings': timings}
-				r = requests.post(url, data=payload, headers=headers)
-				timings += "\n"
-				response += r.text + "\n"
-				print(response)
-				time.sleep(2)
-				index += 1
+			for element in sent_signals[index]:
+				timings += str(element) + ", "
+
+			timings = timings[:-2]
+			payload = {'timings': timings}
+			r = requests.post(url, data=payload, headers=headers)
+			print(r.text)
+			index += 1
+			time.sleep(2)
 
 	thread = threading.Thread(target=run_job)
 	thread.start()
