@@ -40,7 +40,7 @@ const httpsServer = https.createServer(credentials, (request, response) => {
         requestBody += chunk.toString();
     });
     request.on('end', () => {
-        console.log(body);
+        console.log(requestBody);
     
         var agent = new WebhookClient({ request: {body: requestBody} , response });
 
