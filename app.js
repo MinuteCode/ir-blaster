@@ -7,6 +7,8 @@ const express = require('express')
 const nodeRequest = require('request')
 const bodyParser = require('body-parser')
 
+var port = process.env.PORT || 5000
+
 var signals = {}
 signals["Power TV"] = [9010, 4474, 584, 544, 584, 544, 584, 544, 584, 542, 584, 544, 584, 544, 556, 570, 584, 544, 582, 1672, 584, 1670, 584, 1672, 584, 1670, 584, 1670, 584, 1672, 582, 1672, 582, 544, 584, 1672, 584, 542, 558, 1698, 584, 544, 582, 1672, 584, 542, 584, 544, 584, 544, 582, 544, 584, 1670, 558, 570, 584, 1670, 582, 544, 582, 1672, 584, 1670, 584, 1670, 582]
 signals["Source"] = [9004, 4500, 560, 568, 560, 568, 558, 568, 560, 568, 560, 568, 558, 568, 558, 568, 560, 566, 560, 1694, 560, 1696, 558, 1696, 560, 1694, 560, 1694, 560, 1696, 560, 1694, 560, 568, 560, 568, 560, 1694, 560, 568, 560, 568, 558, 1694, 560, 568, 560, 568, 558, 568, 560, 1694, 560, 568, 560, 1694, 560, 1696, 558, 568, 560, 1694, 560, 1696, 560, 1694, 560]
@@ -27,7 +29,7 @@ const credentials = {
 
 var app = express()
 
-app.post('/api/scene/kodi', function(req, res) {
+/*app.post('/api/scene/kodi', function(req, res) {
     var timings = ""
     for (var i = 0; i < signals["Source"].length; i++) {
         timings += signals["Source"][i]
@@ -38,8 +40,12 @@ app.post('/api/scene/kodi', function(req, res) {
     nodeRequest.post("http://192.168.1.56/play", {form: {'timings': timings}})
 
     res.send(JSON.stringify({"fulfillmentText": "Changement de la source pour kodi"}))
+})*/
+
+app.get('/', function(req, res) {
+    res.send(JSON.stringify({Hello: "World"}));
 })
 
-app.listen(5000, () => {
-    console.log("Server is up ...")
+app.listen(port, () => {
+    console.log("Server is up ...");
 })
