@@ -29,6 +29,7 @@ app.get('/index', function(req, res) {
 })
 
 app.get('/api/scene/kodi', function(req, res) {
+    console.log(req.body)
     var timings = ""
     for (var i = 0; i < signals["Source"].length; i++) {
         timings += signals["Source"][i]
