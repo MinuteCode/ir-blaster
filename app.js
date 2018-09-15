@@ -69,7 +69,7 @@ app.use((req, res) => {
     console.log(test)
     res.setHeader('Content-Type', 'application/json')
     res.send(JSON.stringify({
-        "filfillmentText": "Hello there !",
+        "fulfillmentText": "Hello there !",
         "outputContexts": []
     }))
 });
