@@ -24,12 +24,12 @@ app.get('/api/scene/kodi', function(req, res) {
         }
     }
     var postBody = {
-        method: 'POST',
         url: "http://192.168.1.56/play",
+        method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: {
+        form: {
             'timings': timings
         }
     };
