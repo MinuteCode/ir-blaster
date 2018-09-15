@@ -33,10 +33,15 @@ const credentials = {
 
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, (req, res) => {
-    const { headers, method, url } = req
-    console.log(headers)
     var agent = new WebhookClient({ request: req,  response: res })
-    //console.log('Dialogflow Request headers: ', + JSON.stringify(req.headers))
+
+    function welcome(agent) {
+        agent.add("Bienvenue sur VoiceIR !")
+    }
+
+    let intentMap = new Map()
+    intentMap.set('welcome', welcome)
+    agent.handleRequest(intentMap)
 })
 
 // app.use(bodyParser.json())
