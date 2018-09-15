@@ -5,6 +5,7 @@ const http = require('http')
 const https = require('https')
 const express = require('express')
 const nodeRequest = require('request')
+const bodyParser = require('body-parser')
 //const functions = require('firebase-functions');
 //const {WebhookClient} = require('dialogflow-fulfillment');
 //const {Card, Suggestion} = require('dialogflow-fulfillment');
@@ -62,7 +63,8 @@ const credentials = {
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
 
-app.use(express.bodyParser());
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use((req, res) => {
     console.log(req.body)
