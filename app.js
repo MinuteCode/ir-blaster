@@ -1,7 +1,7 @@
 'use strict';
 const fs = require('fs')
-const httpServer = require('http')
-const httpsServer = require('https')
+const http = require('http')
+const https = require('https')
 const express = require('express')
 const nodeRequest = require('request')
 const assistant = require('actions-on-google')
@@ -49,6 +49,15 @@ const ca = fs.readFileSync('/etc/letsencrypt/live/coloc.servebeer.com/chain.pem'
 //     });
 //     res.send(timings)
 // })
+
+const credentials = {
+	key: privateKey,
+	cert: certificate,
+	ca: ca
+};
+
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(credentials, app)
 
 app.use((req, res) => {
 	res.send('Hello there !');
