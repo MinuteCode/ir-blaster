@@ -35,6 +35,15 @@ const httpsServer = https.createServer(credentials, (request, response) => {
     console.log("Headers: " + JSON.stringify(request.headers))
     console.log("Body: " + JSON.stringify(request.body))
 
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+    req.on('end', () => {
+        console.log(body);
+        res.end('ok');
+    });
+
     const userQuery = request.body.result.resolvedQuery;
     console.log(userQuery);
 
