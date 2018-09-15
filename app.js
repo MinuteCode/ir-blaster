@@ -63,7 +63,10 @@ const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
 
 app.use((req, res) => {
-    res.send("Hello there HTTPS")
+    res.send(JSON.stringify({
+        "speech": "Hello",
+        "displayText": "Hello there"
+    }))
 });
 
 httpServer.listen(5001, () => {
