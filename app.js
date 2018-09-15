@@ -100,9 +100,6 @@ app.use((req, res) => {
         "fulfillmentText": "Bonjour !",
         "outputContexts": []
     }))*/
-
-    let intentMap = new Map()
-    intentMap.set('welcome', welcome)
 });
 
 httpServer.listen(5001, () => {
