@@ -83,7 +83,6 @@ app.use((req, res) => {
         }
     };
     nodeRequest(postBody, function(error, response, body) {
-        console.log(error)
         console.log(body)
     });
 
