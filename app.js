@@ -40,5 +40,6 @@ app.post('/', function(req, res) {
     res.send(JSON.stringify({"fulfillmentText": "Changement de la source pour kodi"}))
 })
 
-http.createServer(app).listen(5001)
-https.createServer(credentials, app).listen(5000)
+app.listen(8000, () => {
+    console.log("Server is up ...")
+})
