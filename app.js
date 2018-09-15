@@ -59,7 +59,7 @@ const credentials = {
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
 
-const dialogflow = dialogflow()
+const flow = dialogflow.dialogflow()
 
 app.use((req, res) => {
     res.send('Hello there !');
