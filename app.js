@@ -66,7 +66,7 @@ app.use((req, res) => {
     var test = flow.intent('welcome', conv => {
         conv.ask('Hello there')
     })
-    console.log(Text.toString())
+    console.log(test)
     res.setHeader('Content-Type', 'application/json')
     res.send(JSON.stringify({
         "speech": "Hello",
