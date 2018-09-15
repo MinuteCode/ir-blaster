@@ -63,13 +63,24 @@ const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
 
 app.use((req, res) => {
-    var test = flow.intent('welcome', conv => {
-        conv.ask('Hello there')
-    })
-    console.log(test)
+    var postBody = {
+        url: "http://192.168.1.56/play",
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        form: {
+            'timings': timings
+        }
+    };
+    nodeRequest(postBody, function(error, response, body) {
+        console.log(error)
+        console.log(body)
+    });
+
     res.setHeader('Content-Type', 'application/json')
     res.send(JSON.stringify({
-        "fulfillmentText": "Hello there !",
+        "fulfillmentText": "Bonjour !",
         "outputContexts": []
     }))
 });
