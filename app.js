@@ -5,7 +5,6 @@ const https = require('https')
 const express = require('express')
 const nodeRequest = require('request')
 const assistant = require('actions-on-google')
-const dialogflow = assistant.dialogflow
 
 const app = express()
 
@@ -59,12 +58,12 @@ const credentials = {
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
 
-const flow = dialogflow.dialogflow()
+const flow = dialogflow()
 
 app.use((req, res) => {
     res.send('Hello there !');
     
-    dialogflow.intent('welcome', conv => {
+    flow.intent('welcome', conv => {
         conv.ask('Yo, comment ça va ?')
     });
 });
