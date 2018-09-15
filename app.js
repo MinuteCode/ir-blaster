@@ -63,7 +63,7 @@ const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
 
 app.use((req, res) => {
-    var test = app.intent('welcome', conv => {
+    var test = flow.intent('welcome', conv => {
         conv.ask('Hello there')
     })
     console.log(Text.toString())
