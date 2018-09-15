@@ -1,5 +1,7 @@
 'use strict';
-
+const fs = require('fs')
+const http = require('http')
+const https = require('https')
 const express = require('express')
 const nodeRequest = require('request')
 const assistant = require('actions-on-google')
@@ -14,7 +16,10 @@ signals["DTV"] = [9150, 4352, 682, 446, 706, 422, 678, 448, 680, 448, 678, 448, 
 signals["Down"] = [9134, 4350, 678, 448, 682, 446, 704, 422, 680, 446, 708, 420, 682, 446, 680, 446, 680, 448, 682, 1574, 682, 1574, 678, 1574, 682, 1574, 680, 1576, 682, 1572, 704, 1550, 680, 448, 680, 1574, 682, 444, 678, 1576, 680, 1574, 682, 444, 678, 448, 682, 446, 682, 446, 706, 422, 706, 1546, 680, 448, 708, 418, 680, 1574, 680, 1574, 706, 1548, 682, 1572, 708]
 signals["Enter"] = [9152, 4350, 680, 446, 682, 446, 676, 450, 680, 448, 678, 448, 708, 420, 682, 446, 682, 444, 676, 1578, 680, 1574, 684, 1570, 682, 1574, 682, 1572, 708, 1546, 680, 1574, 678, 450, 682, 444, 680, 446, 678, 450, 678, 448, 708, 1546, 678, 448, 682, 446, 706, 418, 682, 1574, 678, 1576, 678, 1576, 680, 1574, 680, 448, 678, 1574, 682, 1572, 680, 1574, 682]
 
-
+// Certificate
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/coloc.servebeer.com/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/coloc.servebeer.com/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/coloc.servebeer.com/chain.pem', 'utf8');
 
 // app.get('/', function(req, res) {
 //     res.send('Hello World !')
@@ -45,8 +50,14 @@ signals["Enter"] = [9152, 4350, 680, 446, 682, 446, 676, 450, 680, 448, 678, 448
 //     res.send(timings)
 // })
 
-app.use(express.static(__dirname, { dotfiles: 'allow' } ))
+app.use((req, res) => {
+	res.send('Hello there !');
+});
 
-app.listen(5000, function() {
-    console.log('Example app listening on port 5000')
+httpServer.listen(80, () => {
+    console.log('HTTP server on port 80');
+})
+
+httpsServer.listen(443, () => {
+    console.log('HTTPS server on port 443')
 })
