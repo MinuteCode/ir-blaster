@@ -33,7 +33,7 @@ const credentials = {
 
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, (request, response) => {
-    request.on('end', () => {
+    request.on('close', () => {
         var agent = new WebhookClient({ request, response });
         console.log("Headers: " + JSON.stringify(request.headers))
         console.log("Body: " + JSON.stringify(request.body))
