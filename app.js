@@ -8,8 +8,8 @@ const nodeRequest = require('request')
 //const functions = require('firebase-functions');
 //const {WebhookClient} = require('dialogflow-fulfillment');
 //const {Card, Suggestion} = require('dialogflow-fulfillment');
-
-//const flow = dialogflow()
+const {dialogflow, Image} = require('actions-on-google')
+const flow = dialogflow()
 const app = express()
 
 var signals = {}
@@ -63,6 +63,10 @@ const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
 
 app.use((req, res) => {
+    var test = app.intent('welcome', conv => {
+        conv.ask('Hello there')
+    })
+    console.log(Text.toString())
     res.setHeader('Content-Type', 'application/json')
     res.send(JSON.stringify({
         "speech": "Hello",
