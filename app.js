@@ -17,7 +17,7 @@ signals["Down"] = [9134, 4350, 678, 448, 682, 446, 704, 422, 680, 446, 708, 420,
 signals["Enter"] = [9152, 4350, 680, 446, 682, 446, 676, 450, 680, 448, 678, 448, 708, 420, 682, 446, 682, 444, 676, 1578, 680, 1574, 684, 1570, 682, 1574, 682, 1572, 708, 1546, 680, 1574, 678, 450, 682, 444, 680, 446, 678, 450, 678, 448, 708, 1546, 678, 448, 682, 446, 706, 418, 682, 1574, 678, 1576, 678, 1576, 680, 1574, 680, 448, 678, 1574, 682, 1572, 680, 1574, 682]
 
 // Certificate
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/coloc.servebeer.com/privkey.pem', 'utf8');
+/*const privateKey = fs.readFileSync('/etc/letsencrypt/live/coloc.servebeer.com/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('/etc/letsencrypt/live/coloc.servebeer.com/cert.pem', 'utf8');
 const ca = fs.readFileSync('/etc/letsencrypt/live/coloc.servebeer.com/chain.pem', 'utf8');
 
@@ -25,7 +25,7 @@ const credentials = {
 	key: privateKey,
 	cert: certificate,
 	ca: ca
-};
+};*/
 
 var app = express()
 
