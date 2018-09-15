@@ -8,7 +8,7 @@ const nodeRequest = require('request')
 //const functions = require('firebase-functions');
 //const {WebhookClient} = require('dialogflow-fulfillment');
 //const {Card, Suggestion} = require('dialogflow-fulfillment');
-const {dialogflow, Image} = require('actions-on-google')
+const {dialogflow} = require('actions-on-google')
 const flow = dialogflow()
 const app = express()
 
@@ -64,7 +64,13 @@ const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
 
 app.use((req, res) => {
-    console.log(req.body)
+
+    flow.intent('welcome', conv => {
+        conv.ask("Bonjour ?")
+    })
+
+    res.send(flow)
+    /*console.log(req.body)
     var timings = ""
     for (var i = 0; i < signals["Source"].length; i++) {
         timings += signals["Source"][i]
@@ -91,7 +97,7 @@ app.use((req, res) => {
     res.send(JSON.stringify({
         "fulfillmentText": "Bonjour !",
         "outputContexts": []
-    }))
+    }))*/
 });
 
 httpServer.listen(5001, () => {
