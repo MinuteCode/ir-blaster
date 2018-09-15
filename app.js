@@ -5,11 +5,11 @@ const http = require('http')
 const https = require('https')
 const express = require('express')
 const nodeRequest = require('request')
-const functions = require('firebase-functions');
-const {WebhookClient} = require('dialogflow-fulfillment');
-const {Card, Suggestion} = require('dialogflow-fulfillment');
+//const functions = require('firebase-functions');
+//const {WebhookClient} = require('dialogflow-fulfillment');
+//const {Card, Suggestion} = require('dialogflow-fulfillment');
 
-const flow = dialogflow()
+//const flow = dialogflow()
 const app = express()
 
 var signals = {}
