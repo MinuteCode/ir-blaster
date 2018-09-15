@@ -3,6 +3,7 @@ from flask import Flask
 import requests
 import time
 import threading
+import json
 
 app = Flask(__name__)
 
@@ -108,7 +109,7 @@ def trigger_kodi_scene():
 
 	thread = threading.Thread(target=run_job, args=[index])
 	thread.start()
-	return "Kodi scene successfully triggered"
+	return json.dumps({'fullfillmentText': 'Changement de la source pour kodi', 'outputContexts': []})
 
 @app.route('/api/scene/power_up_to_chromecast')
 def trigger_powerup_to_chromecast():
