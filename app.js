@@ -5,10 +5,10 @@ const http = require('http')
 const https = require('https')
 const express = require('express')
 const nodeRequest = require('request')
-const {
-    dialogflow,
-    Image,
-} = require('actions-on-google')
+const functions = require('firebase-functions');
+const {WebhookClient} = require('dialogflow-fulfillment');
+const {Card, Suggestion} = require('dialogflow-fulfillment');
+const nodeRequest = require('request')
 
 const flow = dialogflow()
 const app = express()
@@ -64,9 +64,7 @@ const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
 
 app.use((req, res) => {
-    flow.intent('welcome', conv => {
-        conv.ask('Yo, comment ça va ?')
-    });
+    res.send("Hello there HTTPS")
 });
 
 httpServer.listen(5001, () => {
