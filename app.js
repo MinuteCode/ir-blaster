@@ -1,7 +1,7 @@
 'use strict';
 const fs = require('fs')
-const http = require('http')
-const https = require('https')
+const httpServer = require('http')
+const httpsServer = require('https')
 const express = require('express')
 const nodeRequest = require('request')
 const assistant = require('actions-on-google')
