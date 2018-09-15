@@ -39,7 +39,7 @@ const sessionId = 'welcome-session-id'
 const query = 'Bonjour'
 const languageCode = 'fr-FR'
 
-const sessionClient = new dialogflow.sessionClient();
+const sessionClient = new dialogflow.sessionsClient();
 
 const sessionPath = sessionClient.sessionPath(projectId, sessionId)
 
