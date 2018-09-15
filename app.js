@@ -36,18 +36,15 @@ const httpsServer = https.createServer(credentials, (request, response) => {
     console.log("Body: " + JSON.stringify(request.body))
 
     let body = '';
-    req.on('data', chunk => {
+    request.on('data', chunk => {
         body += chunk.toString();
     });
-    req.on('end', () => {
+    request.on('end', () => {
         console.log(body);
         res.end('ok');
     });
 
-    const userQuery = request.body.result.resolvedQuery;
-    console.log(userQuery);
-
-    request.on('close', () => {
+    /*request.on('close', () => {
         var agent = new WebhookClient({ request, response });
 
         function welcome(agent) {
@@ -57,7 +54,7 @@ const httpsServer = https.createServer(credentials, (request, response) => {
         let intentMap = new Map();
         intentMap.set('welcome', welcome);
         agent.handleRequest(intentMap);
-    })
+    })*/
 })
 
 // app.use(bodyParser.json())
