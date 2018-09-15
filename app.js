@@ -4,8 +4,12 @@ const http = require('http')
 const https = require('https')
 const express = require('express')
 const nodeRequest = require('request')
-const assistant = require('actions-on-google')
+const {
+    dialogflow,
+    Image,
+} = require('actions-on-google')
 
+const flow = dialogflow()
 const app = express()
 
 var signals = {}
@@ -57,8 +61,6 @@ const credentials = {
 
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
-
-const flow = dialogflow()
 
 app.use((req, res) => {
     res.send('Hello there !');
