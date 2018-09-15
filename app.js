@@ -23,8 +23,21 @@ app.get('/api/scene/kodi', function(req, res) {
             timings += ", "
         }
     }
+    var postBody = {
+        method: 'POST',
+        url: "http://192.168.1.56/play",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: {
+            'timings': timings
+        }
+    };
+    nodeRequest(postBody, function(error, response, body) {
+        console.log(error)
+        console.log(response)
+    });
     res.send(timings)
-    res.send('Changing scene to kodi')
 })
 
 app.listen(5000, function() {
