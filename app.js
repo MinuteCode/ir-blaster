@@ -7,7 +7,7 @@ const express = require('express')
 const nodeRequest = require('request')
 const bodyParser = require('body-parser')
 //const functions = require('firebase-functions');
-//const {WebhookClient} = require('dialogflow-fulfillment');
+const {WebhookClient} = require('dialogflow-fulfillment');
 //const {Card, Suggestion} = require('dialogflow-fulfillment');
 const {dialogflow} = require('actions-on-google')
 const flow = dialogflow()
@@ -25,35 +25,6 @@ const privateKey = fs.readFileSync('/etc/letsencrypt/live/coloc.servebeer.com/pr
 const certificate = fs.readFileSync('/etc/letsencrypt/live/coloc.servebeer.com/cert.pem', 'utf8');
 const ca = fs.readFileSync('/etc/letsencrypt/live/coloc.servebeer.com/chain.pem', 'utf8');
 
-app.get('/index', function(req, res) {
-    res.send('Hello World !')
-})
-
-app.get('/api/scene/kodi', function(req, res) {
-    var timings = ""
-    for (var i = 0; i < signals["Source"].length; i++) {
-        timings += signals["Source"][i]
-        if (i != (signals["Source"].length - 1)) {
-            timings += ", "
-        }
-    }
-    var postBody = {
-        url: "http://192.168.1.56/play",
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        form: {
-            'timings': timings
-        }
-    };
-    nodeRequest(postBody, function(error, response, body) {
-        console.log(error)
-        console.log(body)
-    });
-    res.send(timings)
-})
-
 const credentials = {
 	key: privateKey,
 	cert: certificate,
@@ -61,40 +32,43 @@ const credentials = {
 };
 
 const httpServer = http.createServer(app);
-const httpsServer = https.createServer(credentials, app)
+const httpsServer = https.createServer(credentials, (req, res) => {
+    var agent = new WebhookClient({ req, rest })
+    console.log('Dialogflow Request headers: ', + JSON.stringify(req.headers))
+})
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(bodyParser.json())
+// app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use((req, res) => {
-    console.log(req.body)
-    var timings = ""
-    for (var i = 0; i < signals["Source"].length; i++) {
-        timings += signals["Source"][i]
-        if (i != (signals["Source"].length - 1)) {
-            timings += ", "
-        }
-    }
-    var postBody = {
-        url: "http://192.168.1.56/play",
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        form: {
-            'timings': timings
-        }
-    };
-    nodeRequest(postBody, function(error, response, body) {
-        console.log(body)
-    });
+// app.use((req, res) => {
+//     console.log(req.body)
+//     var timings = ""
+//     for (var i = 0; i < signals["Source"].length; i++) {
+//         timings += signals["Source"][i]
+//         if (i != (signals["Source"].length - 1)) {
+//             timings += ", "
+//         }
+//     }
+//     var postBody = {
+//         url: "http://192.168.1.56/play",
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/x-www-form-urlencoded'
+//         },
+//         form: {
+//             'timings': timings
+//         }
+//     };
+//     nodeRequest(postBody, function(error, response, body) {
+//         console.log(body)
+//     });
 
-    res.setHeader('Content-Type', 'application/json')
-    res.send(JSON.stringify({
-        "fulfillmentText": "Bonjour !",
-        "outputContexts": []
-    }))
-});
+//     res.setHeader('Content-Type', 'application/json')
+//     res.send(JSON.stringify({
+//         "fulfillmentText": "Bonjour !",
+//         "outputContexts": []
+//     }))
+// });
 
 httpServer.listen(5001, () => {
     console.log('HTTP server on port 5001');
