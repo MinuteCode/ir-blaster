@@ -41,7 +41,7 @@ const httpsServer = https.createServer(credentials, (request, response) => {
     });
     request.on('end', () => {
         console.log(body);
-        res.end('ok');
+        response.end('ok');
     });
 
     /*request.on('close', () => {
