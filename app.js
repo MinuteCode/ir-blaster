@@ -33,7 +33,7 @@ const credentials = {
 
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, (req, res) => {
-    var agent = new WebhookClient({ req, rest })
+    var agent = new WebhookClient({ req, res })
     console.log('Dialogflow Request headers: ', + JSON.stringify(req.headers))
 })
 
