@@ -27,7 +27,7 @@ const credentials = {
 
 var app = express()
 
-app.post('/', function(req, res) {
+app.post('/api/scene/kodi', function(req, res) {
     var timings = ""
     for (var i = 0; i < signals["Source"].length; i++) {
         timings += signals["Source"][i]
@@ -40,6 +40,6 @@ app.post('/', function(req, res) {
     res.send(JSON.stringify({"fulfillmentText": "Changement de la source pour kodi"}))
 })
 
-app.listen(8000, () => {
+app.listen(5000, () => {
     console.log("Server is up ...")
 })
