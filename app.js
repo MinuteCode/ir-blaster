@@ -43,7 +43,17 @@ var app = express()
 })*/
 
 app.get('/', function(req, res) {
-    res.send(JSON.stringify({Hello: "World"}));
+    //res.send(JSON.stringify({Hello: "World"}));
+    var timings = ""
+    for (var i = 0; i < signals["Source"].length; i++) {
+        timings += signals["Source"][i]
+        if (i != (signals["Source"].length - 1)) {
+            timings += ", "
+        }
+    }
+    nodeRequest.post("http://192.168.1.56/play", {form: {'timings': timings}})
+
+    res.send(JSON.stringify({"fulfillmentText": "Changement de la source pour kodi"}))
 })
 
 app.listen(port, () => {
