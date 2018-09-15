@@ -42,7 +42,7 @@ const httpsServer = https.createServer(credentials, (request, response) => {
     request.on('end', () => {
         console.log(body);
     
-        var agent = new WebhookClient({ request, response });
+        var agent = new WebhookClient({ body, response });
 
         function welcome(agent) {
             agent.add("Bienvenue sur VoiceIR !")
