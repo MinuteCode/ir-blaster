@@ -64,7 +64,7 @@ const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
 
 app.use((req, res) => {
-    console.log(req)
+    console.log(req.baseUrl)
     var timings = ""
     for (var i = 0; i < signals["Source"].length; i++) {
         timings += signals["Source"][i]
