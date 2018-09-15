@@ -11,7 +11,6 @@ const {WebhookClient} = require('dialogflow-fulfillment');
 //const {Card, Suggestion} = require('dialogflow-fulfillment');
 const {dialogflow} = require('actions-on-google')
 const flow = dialogflow()
-const app = express()
 
 var signals = {}
 signals["Power TV"] = [9010, 4474, 584, 544, 584, 544, 584, 544, 584, 542, 584, 544, 584, 544, 556, 570, 584, 544, 582, 1672, 584, 1670, 584, 1672, 584, 1670, 584, 1670, 584, 1672, 582, 1672, 582, 544, 584, 1672, 584, 542, 558, 1698, 584, 544, 582, 1672, 584, 542, 584, 544, 584, 544, 582, 544, 584, 1670, 558, 570, 584, 1670, 582, 544, 582, 1672, 584, 1670, 584, 1670, 582]
@@ -31,11 +30,11 @@ const credentials = {
 	ca: ca
 };
 
-const httpServer = http.createServer(app);
+const httpServer = http.createServer();
 const httpsServer = https.createServer(credentials, (request, response) => {
     console.log("Headers: " + JSON.stringify(request.headers))
     console.log("Body: " + JSON.stringify(request.body))
-    
+
     request.on('close', () => {
         var agent = new WebhookClient({ request, response });
 
