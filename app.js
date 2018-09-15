@@ -69,7 +69,9 @@ app.use((req, res) => {
         conv.ask("Bonjour ?")
     })
 
-    res.send(flow)
+    app.on('request', () => {
+        res.send(flow)
+    })
     /*console.log(req.body)
     var timings = ""
     for (var i = 0; i < signals["Source"].length; i++) {
@@ -98,6 +100,9 @@ app.use((req, res) => {
         "fulfillmentText": "Bonjour !",
         "outputContexts": []
     }))*/
+
+    let intentMap = new Map()
+    intentMap.set('welcome', welcome)
 });
 
 httpServer.listen(5001, () => {
