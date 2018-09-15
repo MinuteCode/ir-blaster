@@ -35,14 +35,14 @@ const httpsServer = https.createServer(credentials, (request, response) => {
     console.log("Headers: " + JSON.stringify(request.headers))
     console.log("Body: " + JSON.stringify(request.body))
 
-    let body = '';
+    let requestBody = '';
     request.on('data', chunk => {
-        body += chunk.toString();
+        requestBody += chunk.toString();
     });
     request.on('end', () => {
         console.log(body);
     
-        var agent = new WebhookClient({ body, response });
+        var agent = new WebhookClient({ request: {body: requestBody} , response });
 
         function welcome(agent) {
             agent.add("Bienvenue sur VoiceIR !")
