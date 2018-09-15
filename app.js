@@ -62,10 +62,7 @@ const credentials = {
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
 
-app.configure(function() {
-    app.use(express.bodyParser());
-    app.use(app.router);
-});
+app.use(express.bodyParser());
 
 app.use((req, res) => {
     console.log(req.body)
