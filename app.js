@@ -21,34 +21,34 @@ const privateKey = fs.readFileSync('/etc/letsencrypt/live/coloc.servebeer.com/pr
 const certificate = fs.readFileSync('/etc/letsencrypt/live/coloc.servebeer.com/cert.pem', 'utf8');
 const ca = fs.readFileSync('/etc/letsencrypt/live/coloc.servebeer.com/chain.pem', 'utf8');
 
-// app.get('/', function(req, res) {
-//     res.send('Hello World !')
-// })
+app.get('/index', function(req, res) {
+    res.send('Hello World !')
+})
 
-// app.get('/api/scene/kodi', function(req, res) {
-//     var timings = ""
-//     for (var i = 0; i < signals["Source"].length; i++) {
-//         timings += signals["Source"][i]
-//         if (i != (signals["Source"].length - 1)) {
-//             timings += ", "
-//         }
-//     }
-//     var postBody = {
-//         url: "http://192.168.1.56/play",
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/x-www-form-urlencoded'
-//         },
-//         form: {
-//             'timings': timings
-//         }
-//     };
-//     nodeRequest(postBody, function(error, response, body) {
-//         console.log(error)
-//         console.log(body)
-//     });
-//     res.send(timings)
-// })
+app.get('/api/scene/kodi', function(req, res) {
+    var timings = ""
+    for (var i = 0; i < signals["Source"].length; i++) {
+        timings += signals["Source"][i]
+        if (i != (signals["Source"].length - 1)) {
+            timings += ", "
+        }
+    }
+    var postBody = {
+        url: "http://192.168.1.56/play",
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        form: {
+            'timings': timings
+        }
+    };
+    nodeRequest(postBody, function(error, response, body) {
+        console.log(error)
+        console.log(body)
+    });
+    res.send(timings)
+})
 
 const credentials = {
 	key: privateKey,
