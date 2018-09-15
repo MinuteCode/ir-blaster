@@ -64,15 +64,7 @@ const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
 
 app.use((req, res) => {
-
-    flow.intent('welcome', conv => {
-        conv.ask("Bonjour ?")
-    })
-
-    app.on('request', () => {
-        res.send(flow)
-    })
-    /*console.log(req.body)
+    console.log(req)
     var timings = ""
     for (var i = 0; i < signals["Source"].length; i++) {
         timings += signals["Source"][i]
@@ -99,7 +91,7 @@ app.use((req, res) => {
     res.send(JSON.stringify({
         "fulfillmentText": "Bonjour !",
         "outputContexts": []
-    }))*/
+    }))
 });
 
 httpServer.listen(5001, () => {
