@@ -52,7 +52,8 @@ app.get('/', function(req, res) {
         }
     }
     console.log(timings)
-    nodeRequest.post("http://192.168.1.56/play", {form: {'timings': timings}})
+    r = nodeRequest.post("http://192.168.1.56/play", {form: {'timings': timings}})
+    console.log(r.text)
 
     res.send(JSON.stringify({"fulfillmentText": "Changement de la source pour kodi"}))
 })
