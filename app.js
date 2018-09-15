@@ -35,6 +35,9 @@ const httpsServer = https.createServer(credentials, (request, response) => {
     console.log("Headers: " + JSON.stringify(request.headers))
     console.log("Body: " + JSON.stringify(request.body))
 
+    const userQuery = request.body.result.resolvedQuery;
+    console.log(userQuery);
+
     request.on('close', () => {
         var agent = new WebhookClient({ request, response });
 
