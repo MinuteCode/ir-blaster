@@ -33,15 +33,17 @@ const credentials = {
 
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, (req, res) => {
-    var agent = new WebhookClient({ request: req,  response: res })
+    var agent = new WebhookClient({ request: req,  response: res });
+    console.log("Headers: " + JSON.stringify(request.headers))
+    console.log("Body: " + JSON.stringify(request.body))
 
     function welcome(agent) {
         agent.add("Bienvenue sur VoiceIR !")
-    }
+    };
 
-    let intentMap = new Map()
-    intentMap.set('welcome', welcome)
-    agent.handleRequest(intentMap)
+    let intentMap = new Map();
+    intentMap.set('welcome', welcome);
+    agent.handleRequest(intentMap);
 })
 
 // app.use(bodyParser.json())
