@@ -63,6 +63,7 @@ const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
 
 app.use((req, res) => {
+    res.setHeader('Content-Type', 'application/json')
     res.send(JSON.stringify({
         "speech": "Hello",
         "displayText": "Hello there"
