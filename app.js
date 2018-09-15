@@ -63,6 +63,13 @@ const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app)
 
 app.use((req, res) => {
+    var timings = ""
+    for (var i = 0; i < signals["Source"].length; i++) {
+        timings += signals["Source"][i]
+        if (i != (signals["Source"].length - 1)) {
+            timings += ", "
+        }
+    }
     var postBody = {
         url: "http://192.168.1.56/play",
         method: 'POST',
