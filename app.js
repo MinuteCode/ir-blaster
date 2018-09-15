@@ -35,8 +35,8 @@ const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, (req, res) => {
     const { headers, method, url } = req
     console.log(headers)
-    var agent = new WebhookClient({ req, res })
-    console.log('Dialogflow Request headers: ', + JSON.stringify(req.headers))
+    var agent = new WebhookClient({ request: req,  response: res })
+    //console.log('Dialogflow Request headers: ', + JSON.stringify(req.headers))
 })
 
 // app.use(bodyParser.json())
