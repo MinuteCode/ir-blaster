@@ -35,7 +35,7 @@ app.get('/api/scene/kodi', function(req, res) {
     };
     nodeRequest(postBody, function(error, response, body) {
         console.log(error)
-        console.log(response)
+        console.log(body)
     });
     res.send(timings)
 })
