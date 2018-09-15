@@ -12,6 +12,10 @@ const {WebhookClient} = require('dialogflow-fulfillment');
 const {dialogflow} = require('actions-on-google')
 const flow = dialogflow()
 
+const app = express()
+
+app.post('/api/scene/kodi')
+
 var signals = {}
 signals["Power TV"] = [9010, 4474, 584, 544, 584, 544, 584, 544, 584, 542, 584, 544, 584, 544, 556, 570, 584, 544, 582, 1672, 584, 1670, 584, 1672, 584, 1670, 584, 1670, 584, 1672, 582, 1672, 582, 544, 584, 1672, 584, 542, 558, 1698, 584, 544, 582, 1672, 584, 542, 584, 544, 584, 544, 582, 544, 584, 1670, 558, 570, 584, 1670, 582, 544, 582, 1672, 584, 1670, 584, 1670, 582]
 signals["Source"] = [9004, 4500, 560, 568, 560, 568, 558, 568, 560, 568, 560, 568, 558, 568, 558, 568, 560, 566, 560, 1694, 560, 1696, 558, 1696, 560, 1694, 560, 1694, 560, 1696, 560, 1694, 560, 568, 560, 568, 560, 1694, 560, 568, 560, 568, 558, 1694, 560, 568, 560, 568, 558, 568, 560, 1694, 560, 568, 560, 1694, 560, 1696, 558, 568, 560, 1694, 560, 1696, 560, 1694, 560]
@@ -30,9 +34,46 @@ const credentials = {
 	ca: ca
 };
 
+const projectId = 'voiceir-1641f'
+const sessionId = 'welcome-session-id'
+const query = 'Bonjour'
+const languageCode = 'fr-FR'
+
+const sessionClient = new dialogflow.sessionClient();
+
+const sessionPath = sessionClient.sessionPath(projectId, sessionId)
+
+const request = {
+    session: sessionPath,
+    queryInput: {
+        text: {
+            text: query,
+            languageCode: languageCode
+        },
+    },
+};
+
+// Send request and log result
+sessionClient
+  .detectIntent(request)
+  .then(responses => {
+    console.log('Detected intent');
+    const result = responses[0].queryResult;
+    console.log(`  Query: ${result.queryText}`);
+    console.log(`  Response: ${result.fulfillmentText}`);
+    if (result.intent) {
+      console.log(`  Intent: ${result.intent.displayName}`);
+    } else {
+      console.log(`  No intent matched.`);
+    }
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
+  });
+
 const httpServer = http.createServer();
 const httpsServer = https.createServer(credentials, (request, response) => {
-    console.log("Headers: " + JSON.stringify(request.headers))
+    /*console.log("Headers: " + JSON.stringify(request.headers))
     console.log("Body: " + JSON.stringify(request.body))
 
     let requestBody = '';
@@ -53,7 +94,7 @@ const httpsServer = https.createServer(credentials, (request, response) => {
         agent.handleRequest(intentMap);
 
         //response.end('ok');
-    });
+    });*/
 })
 
 // app.use(bodyParser.json())
