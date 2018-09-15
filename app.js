@@ -69,8 +69,8 @@ app.use((req, res) => {
     console.log(test)
     res.setHeader('Content-Type', 'application/json')
     res.send(JSON.stringify({
-        "speech": "Hello",
-        "displayText": "Hello there"
+        "filfillmentText": "Hello there !",
+        "outputContexts": []
     }))
 });
 
