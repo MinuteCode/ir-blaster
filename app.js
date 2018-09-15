@@ -41,10 +41,7 @@ const httpsServer = https.createServer(credentials, (request, response) => {
     });
     request.on('end', () => {
         console.log(body);
-        response.end('ok');
-    });
-
-    /*request.on('close', () => {
+    
         var agent = new WebhookClient({ request, response });
 
         function welcome(agent) {
@@ -54,7 +51,9 @@ const httpsServer = https.createServer(credentials, (request, response) => {
         let intentMap = new Map();
         intentMap.set('welcome', welcome);
         agent.handleRequest(intentMap);
-    })*/
+
+        //response.end('ok');
+    });
 })
 
 // app.use(bodyParser.json())
