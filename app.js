@@ -6,15 +6,6 @@ const https = require('https')
 const express = require('express')
 const nodeRequest = require('request')
 const bodyParser = require('body-parser')
-//const functions = require('firebase-functions');
-const {WebhookClient} = require('dialogflow-fulfillment');
-//const {Card, Suggestion} = require('dialogflow-fulfillment');
-const {dialogflow} = require('actions-on-google')
-const flow = dialogflow()
-
-const app = express()
-
-app.post('/api/scene/kodi')
 
 var signals = {}
 signals["Power TV"] = [9010, 4474, 584, 544, 584, 544, 584, 544, 584, 542, 584, 544, 584, 544, 556, 570, 584, 544, 582, 1672, 584, 1670, 584, 1672, 584, 1670, 584, 1670, 584, 1672, 582, 1672, 582, 544, 584, 1672, 584, 542, 558, 1698, 584, 544, 582, 1672, 584, 542, 584, 544, 584, 544, 582, 544, 584, 1670, 558, 570, 584, 1670, 582, 544, 582, 1672, 584, 1670, 584, 1670, 582]
@@ -34,106 +25,17 @@ const credentials = {
 	ca: ca
 };
 
-const projectId = 'voiceir-1641f'
-const sessionId = 'welcome-session-id'
-const query = 'Bonjour'
-const languageCode = 'fr-FR'
+var app = express()
 
-const sessionClient = new dialogflow.sessionsClient();
-
-const sessionPath = sessionClient.sessionPath(projectId, sessionId)
-
-const request = {
-    session: sessionPath,
-    queryInput: {
-        text: {
-            text: query,
-            languageCode: languageCode
-        },
-    },
-};
-
-// Send request and log result
-sessionClient
-  .detectIntent(request)
-  .then(responses => {
-    console.log('Detected intent');
-    const result = responses[0].queryResult;
-    console.log(`  Query: ${result.queryText}`);
-    console.log(`  Response: ${result.fulfillmentText}`);
-    if (result.intent) {
-      console.log(`  Intent: ${result.intent.displayName}`);
-    } else {
-      console.log(`  No intent matched.`);
+app.post('/', function(req, res) {
+    var timings = ""
+    for (var i = 0; i < signals["Source"].length; i++) {
+        timings += signals["Source"][i]
+        if (i != (signals["Source"].length - 1)) {
+            timings += ", "
+        }
     }
-  })
-  .catch(err => {
-    console.error('ERROR:', err);
-  });
+    nodeRequest.post("http://192.168.1.56/play", {form: {'timings': timings}})
 
-const httpServer = http.createServer();
-const httpsServer = https.createServer(credentials, (request, response) => {
-    /*console.log("Headers: " + JSON.stringify(request.headers))
-    console.log("Body: " + JSON.stringify(request.body))
-
-    let requestBody = '';
-    request.on('data', chunk => {
-        requestBody += chunk.toString();
-    });
-    request.on('end', () => {
-        console.log(requestBody);
-    
-        var agent = new WebhookClient({ request: {body: requestBody} , response });
-
-        function welcome(agent) {
-            agent.add("Bienvenue sur VoiceIR !")
-        };
-
-        let intentMap = new Map();
-        intentMap.set('welcome', welcome);
-        agent.handleRequest(intentMap);
-
-        //response.end('ok');
-    });*/
-})
-
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({ extended: true }))
-
-// app.use((req, res) => {
-//     console.log(req.body)
-//     var timings = ""
-//     for (var i = 0; i < signals["Source"].length; i++) {
-//         timings += signals["Source"][i]
-//         if (i != (signals["Source"].length - 1)) {
-//             timings += ", "
-//         }
-//     }
-//     var postBody = {
-//         url: "http://192.168.1.56/play",
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/x-www-form-urlencoded'
-//         },
-//         form: {
-//             'timings': timings
-//         }
-//     };
-//     nodeRequest(postBody, function(error, response, body) {
-//         console.log(body)
-//     });
-
-//     res.setHeader('Content-Type', 'application/json')
-//     res.send(JSON.stringify({
-//         "fulfillmentText": "Bonjour !",
-//         "outputContexts": []
-//     }))
-// });
-
-httpServer.listen(5001, () => {
-    console.log('HTTP server on port 5001');
-})
-
-httpsServer.listen(5000, () => {
-    console.log('HTTPS server on port 5000')
+    res.send(JSON.stringify({"fulfillmentText": "Changement de la source pour kodi"}))
 })
