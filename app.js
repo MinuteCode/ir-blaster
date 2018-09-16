@@ -42,18 +42,19 @@ var app = express()
     res.send(JSON.stringify({"fulfillmentText": "Changement de la source pour kodi"}))
 })*/
 
-var kodiSwitch = function() {
+var createTimings = function(signal) {
     var timings = ""
-    for (var i = 0; i < signals["Source"].length; i++) {
-        timings += signals["Source"][i]
-        if (i != (signals["Source"].length - 1)) {
+    for (var i = 0; i < signal.length; i++) {
+        timings += signal[i]
+        if (i != (signal.length - 1)) {
             timings += ", "
         }
     }
-    var postBody = {
-        method: 'POST',
-        url: "http://192.168.1.56/play",
-    }
+    return timings
+}
+
+var kodiSwitch = function() {
+    var timings = createTimings(signals["Source"])
     nodeRequest.post("http://192.168.1.56/play", {form: {'timings': timings}})
 }
 
