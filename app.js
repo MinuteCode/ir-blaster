@@ -42,20 +42,7 @@ var app = express()
     res.send(JSON.stringify({"fulfillmentText": "Changement de la source pour kodi"}))
 })*/
 
-app.post('/', function(req, res) {
-
-    let bodyRequest = ""
-    req.on('data', chunk => {
-        bodyRequest += chunk.toString()
-    })
-
-    req.on('end', () => {
-        console.log(bodyRequest);
-        var postJson = JSON.parse(bodyRequest);
-
-        console.log(postJson["queryResult"]["intent"]["displayName"]);
-    })
-
+var kodiSwitch = function() {
     var timings = ""
     for (var i = 0; i < signals["Source"].length; i++) {
         timings += signals["Source"][i]
@@ -70,6 +57,29 @@ app.post('/', function(req, res) {
     nodeRequest.post("http://192.168.1.56/play", {form: {'timings': timings}})
 
     res.send(JSON.stringify({"fulfillmentText": "Changement de la source pour kodi"}))
+}
+
+app.post('/', function(req, res) {
+
+    let bodyRequest = ""
+    req.on('data', chunk => {
+        bodyRequest += chunk.toString()
+    })
+
+    req.on('end', () => {
+        console.log(bodyRequest);
+        var postJson = JSON.parse(bodyRequest);
+
+        let intentName = postJson["queryResult"]["intent"]["displayName"]
+        
+        switch(intentName) {
+            case 'welcome':
+                res.send(JSON.stringify({"fulfillmentText": "Bonjour, quelle source est-ce que je dois sélectionner ?"}))
+
+            case 'welcome - source kodi':
+                res.send(JSON.stringify({"fulfillmentText": "Ok, je bascule la source sur kodi"}))
+        }
+    })
 })
 
 http.createServer(app).listen(5001)
