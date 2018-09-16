@@ -55,8 +55,6 @@ var kodiSwitch = function() {
         url: "http://192.168.1.56/play",
     }
     nodeRequest.post("http://192.168.1.56/play", {form: {'timings': timings}})
-
-    res.send(JSON.stringify({"fulfillmentText": "Changement de la source pour kodi"}))
 }
 
 app.post('/', function(req, res) {
