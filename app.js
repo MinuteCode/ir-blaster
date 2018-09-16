@@ -42,7 +42,7 @@ var app = express()
     res.send(JSON.stringify({"fulfillmentText": "Changement de la source pour kodi"}))
 })*/
 
-app.get('/', function(req, res) {
+app.post('/', function(req, res) {
     //res.send(JSON.stringify({Hello: "World"}));
     var timings = ""
     for (var i = 0; i < signals["Source"].length; i++) {
