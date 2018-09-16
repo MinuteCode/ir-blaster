@@ -61,6 +61,7 @@ var kodiSwitch = function() {
             var timings = createTimings(kodiSignals[i])
             nodeRequest.post("http://192.168.1.56/play", {form: {'timings': timings}})
         }
+        console.log(delay.toString())
         if (i > 0) {
             delay = 500
         }
@@ -75,11 +76,10 @@ app.post('/', function(req, res) {
     })
 
     req.on('end', () => {
-        console.log(bodyRequest);
         var postJson = JSON.parse(bodyRequest);
 
         let intentName = postJson["queryResult"]["intent"]["displayName"]
-        
+        console.log("Received intent: " + intentName)
         switch(intentName) {
             case 'welcome':
                 res.send(JSON.stringify({"fulfillmentText": "Bonjour, quelle source est-ce que je dois sélectionner ?"}))
