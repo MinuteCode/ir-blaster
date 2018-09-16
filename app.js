@@ -54,8 +54,11 @@ var createTimings = function(signal) {
 }
 
 var kodiSwitch = function() {
-    var timings = createTimings(signals["Source"])
-    nodeRequest.post("http://192.168.1.56/play", {form: {'timings': timings}})
+    var kodiSignals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
+    for (var i = 0; i < 10; i++) {
+        var timings = createTimings(kodiSignals[i])
+        nodeRequest.post("http://192.168.1.56/play", {form: {'timings': timings}})
+    }
 }
 
 app.post('/', function(req, res) {
