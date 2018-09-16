@@ -77,6 +77,7 @@ app.post('/', function(req, res) {
                 res.send(JSON.stringify({"fulfillmentText": "Bonjour, quelle source est-ce que je dois sélectionner ?"}))
 
             case 'welcome - source kodi':
+                kodiSwitch()
                 res.send(JSON.stringify({"fulfillmentText": "Ok, je bascule la source sur kodi"}))
         }
     })
