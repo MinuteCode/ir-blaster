@@ -50,9 +50,8 @@ app.post('/', function(req, res) {
     })
 
     req.on('end', () => {
-        postJson = {}
         console.log(bodyRequest);
-        postJson = JSON.parse(bodyRequest);
+        var postJson = JSON.parse(bodyRequest);
 
         console.log(postJson["queryResult"]["intent"]["displayName"]);
     })
