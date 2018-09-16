@@ -42,6 +42,10 @@ var app = express()
     res.send(JSON.stringify({"fulfillmentText": "Changement de la source pour kodi"}))
 })*/
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 var createTimings = function(signal) {
     var timings = ""
     for (var i = 0; i < signal.length; i++) {
@@ -57,15 +61,15 @@ var kodiSwitch = function() {
     var kodiSignals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
     var delay = 0
     for (var i = 0; i < 10; i++) {
-        setTimeout(() => {
-            var timings = createTimings(kodiSignals[i])
-            nodeRequest.post("http://192.168.1.56/play", {form: {'timings': timings}})
-        }, delay)
+        var timings = createTimings(kodiSignals[i])
+        nodeRequest.post("http://192.168.1.56/play", {form: {'timings': timings}})
+        
         if (i == 0) {
             delay = 5000
         } else {
             delay = 500
         }
+        await sleep(delay)
         console.log(delay.toString())
     }
 }
