@@ -65,5 +65,5 @@ app.get('/', function(req, res) {
     console.log("Server is up ...");
 })*/
 
-httpServer = http.createServer(app).listen(5001)
-httpsServer = https.createServer(credentials, app).listen(5000)
+http.createServer(app).listen(5001)
+https.createServer(credentials, app).listen(5000)
