@@ -75,10 +75,16 @@ app.post('/', function(req, res) {
         switch(intentName) {
             case 'welcome':
                 res.send(JSON.stringify({"fulfillmentText": "Bonjour, quelle source est-ce que je dois sélectionner ?"}))
+                break;
 
             case 'welcome - source kodi':
                 kodiSwitch()
                 res.send(JSON.stringify({"fulfillmentText": "Ok, je bascule la source sur kodi"}))
+                break;
+            
+            default:
+                res.send(JSON.stringify({"fulfillmentText": "Désolé, je n'ai pas compris ce que vous essayez de dire"}))
+                break;
         }
     })
 })
