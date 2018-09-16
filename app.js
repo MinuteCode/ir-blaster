@@ -114,6 +114,7 @@ app.post('/', function(req, res) {
             case 'source chromecast':
                 chromecastSwitch()
                 res.send(JSON.stringify({"fulfillmentText": "Ok, je bascule la source sur chromecast"}))
+                break
             
             default:
                 res.send(JSON.stringify({"fulfillmentText": "Désolé, je n'ai pas compris ce que vous essayez de dire"}))
