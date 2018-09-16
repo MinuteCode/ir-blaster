@@ -51,6 +51,9 @@ app.post('/', function(req, res) {
 
     req.on('end', () => {
         console.log(bodyRequest)
+        postJson = JSON.parse(bodyRequest)
+
+        console.log(postJson["queryResult"]["intent"]["displayName"])
     })
 
     var timings = ""
