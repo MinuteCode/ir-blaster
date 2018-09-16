@@ -43,7 +43,16 @@ var app = express()
 })*/
 
 app.post('/', function(req, res) {
-    //res.send(JSON.stringify({Hello: "World"}));
+
+    let bodyRequest = ""
+    req.on('data', chunk => {
+        bodyRequest += chunk.toString()
+    })
+
+    req.on('end', () => {
+        console.log(bodyRequest)
+    })
+
     var timings = ""
     for (var i = 0; i < signals["Source"].length; i++) {
         timings += signals["Source"][i]
@@ -59,10 +68,6 @@ app.post('/', function(req, res) {
 
     res.send(JSON.stringify({"fulfillmentText": "Changement de la source pour kodi"}))
 })
-
-/*app.listen(port, () => {
-    console.log("Server is up ...");
-})*/
 
 http.createServer(app).listen(5001)
 https.createServer(credentials, app).listen(5000)
