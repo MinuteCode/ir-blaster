@@ -57,7 +57,7 @@ var createTimings = function(signal) {
     return timings
 }
 
-var kodiSwitch = function() {
+var kodiSwitch = async function() {
     var kodiSignals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
     var delay = 0
     for (var i = 0; i < 10; i++) {
