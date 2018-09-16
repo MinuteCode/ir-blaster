@@ -73,6 +73,22 @@ var kodiSwitch = async function() {
     }
 }
 
+var chromecastSwitch = async function() {
+    var chromecastSignals = [signals["DTV"], signals["Source"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Down"], signals["Enter"]]
+    var delay = 0
+    for (var i = 0; i < 10; i++) {
+        var timings = createTimings(chromecastSignals[i])
+        nodeRequest.post("http://192.168.1.56/play", {form: {'timings': timings}})
+        
+        if (i == 0) {
+            delay = 5000
+        } else {
+            delay = 500
+        }
+        await sleep(delay)
+    }
+}
+
 app.post('/', function(req, res) {
 
     let bodyRequest = ""
@@ -90,10 +106,14 @@ app.post('/', function(req, res) {
                 res.send(JSON.stringify({"fulfillmentText": "Bonjour, quelle source est-ce que je dois sélectionner ?"}))
                 break;
 
-            case 'welcome - source kodi':
+            case 'source kodi':
                 kodiSwitch()
                 res.send(JSON.stringify({"fulfillmentText": "Ok, je bascule la source sur kodi"}))
                 break;
+
+            case 'source chromecast':
+                chromecastSwitch()
+                res.send(JSON.stringify({"fulfillmentText": "Ok, je bascule la source sur chromecast"}))
             
             default:
                 res.send(JSON.stringify({"fulfillmentText": "Désolé, je n'ai pas compris ce que vous essayez de dire"}))
